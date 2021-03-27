@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  />
+  <link rel="stylesheet" href="styles.css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-firestore.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <body style="padding: 20px">
+    <h1>Practice memorizing vocabulary HACKERS IELTS</h1>
+    <div>English language skills :</div>
+    <div style="display: inline-flex">
+      <div class="form-check" style="padding-right: 20px">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="radioListening"
+        />
+        <label class="form-check-label" for="radioListening"> Listening </label>
+      </div>
+      <div class="form-check" style="padding-right: 20px">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="radioReading"
+          checked
+        />
+        <label class="form-check-label" for="radioReading"> Reading </label>
+      </div>
+      <div class="form-check" style="padding-right: 20px">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="radioWriting"
+        />
+        <label class="form-check-label" for="radioWriting"> Writing </label>
+      </div>
+      <div class="form-check" style="padding-right: 20px">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="radioSpeaking"
+        />
+        <label class="form-check-label" for="radioSpeaking"> Speaking </label>
+      </div>
+    </div>
+    <div></div>
+    <button
+      type="button"
+      id="buttonsss"
+      onclick="addlistVoca()"
+      class="btn btn-primary"
+      style="margin: 2px"
+    >
+      New Vocabulary
+    </button>
+    <button
+      type="button"
+      onclick="addVoca()"
+      class="btn btn-primary"
+      style="margin: 2px"
+    >
+      Confirm
+    </button>
+    <button
+      type="button"
+      onclick="examination()"
+      class="btn btn-primary"
+      style="margin: 2px"
+    >
+      Random
+    </button>
+
+    <!-- <button type="button" onclick="reset()">Reset</button> -->
+    <div id="count-time" style="float: right; padding-right: 50px"></div>
+    <div id="score" style="float: right; padding-right: 50px"></div>
+    <input
+      type="text"
+      id="count-part"
+      class="rounded-circle"
+      style="width: 40px; height: 40px; text-align: center"
+    />
+
+    <div id="list-unit"></div>
+    <div id="addVoca"></div>
+    <p id="demo"></p>
+    <div id="addVoca"></div>
+    <button
+      type="button"
+      onclick="checkWrdsDefs()"
+      class="btn btn-primary"
+      style="margin: 2px"
+    >
+      Finish
+    </button>
+  </body>
+
+  <script src="app.js"></script>
+</html>
