@@ -27,9 +27,13 @@ const COLOR_BUTTON = {
 
 let arrDefs = new Array();
 let arrWrds = new Array();
+let arrExs = new Array();
+
 let resultWords = new Array();
+
 let randomArrayDefs = new Array();
 let randomArrayWrds = new Array();
+let randomArrayExs = new Array();
 let count_part = 1;
 
 let timePassed = 0;
@@ -172,10 +176,12 @@ function addlistVoca() {
           <div text-align: center>
               <span class="badge">${i}</span>
 
-              <div style = "display: inline-block;">
-                  <input  style = " margin : 2px ;width = 50px" class="form-control"  type = "text" id = "W${i}" >
-                  <input  style = " margin : 2px ;width = 50px" class="form-control" type = "text" id = "D${i}" >
+              <div style = "display: inline-flex">
+                  <input  style = " margin : 2px ;width = 50px" class="form-control" placeholder= "Word"  type = "text" id = "W${i}" >
+                  <input  style = " margin : 2px ;width = 50px" class="form-control" placeholder= "Defination" type = "text" id = "D${i}" >
+                  <input  style = " margin : 2px ;width = 50px" class="form-control" placeholder= "Example" type = "text" id = "E${i}" >
               </div>
+              
           </div>
           `;
   }
@@ -184,6 +190,7 @@ function addlistVoca() {
 function reset() {
   getWords();
   getDefinitions();
+  getExamples();
   // examination();
 }
 
@@ -210,6 +217,9 @@ function examination() {
                   i + 1
                 }" style = " margin : 2px ;width = 50px"class="form-control">
               </div>
+              <button class="btn btn-primary" style ="margin : 2px">Example: ${
+                randomArrayExs[i]
+              }</button>
               <button id = "finish${
                 i + 1
               }" style="display: none" class="btn btn-primary">${
@@ -249,8 +259,10 @@ function checkWrdsDefs() {
 function random() {
   let tempRADs = randomArrayDefs;
   let tempRAWs = randomArrayWrds;
+  let tempRAEs = randomArrayExs;
   randomArrayDefs = [];
   randomArrayWrds = [];
+  randomArrayExs = [];
   for (let i = 0; i < 20; i++) {
     let randomDefs = tempRADs[Math.floor(Math.random() * tempRADs.length)];
     for (let j = 0; j < tempRADs.length; j++) {
@@ -258,13 +270,19 @@ function random() {
         tempRADs.splice(j, 1);
         randomArrayWrds[i] = tempRAWs[j];
         resultWords[i] = randomArrayWrds[i];
+
+        randomArrayExs[i] = tempRAEs[j];
+        tempRAEs.splice(j, 1);
         tempRAWs.splice(j, 1);
         randomArrayDefs[i] = randomDefs;
+        console.log(j);
 
         j = tempRADs.length;
       }
     }
   }
+  console.log(randomArrayWrds);
+  console.log(randomArrayExs);
 }
 
 async function getDefinitions() {
@@ -273,7 +291,7 @@ async function getDefinitions() {
     .where("Part", "==", "" + document.getElementById("count-part").value);
   await docRef.get().then(function (querySnapshot) {
     querySnapshot.forEach(function (data) {
-      for (let i = 0, j = 1; i < 20; i++, j += 2) {
+      for (let i = 0, j = 1; i < 20; i++, j += 3) {
         arrDefs[i] = data.data()[j + 1];
       }
     });
@@ -290,7 +308,7 @@ async function getWords() {
     .where("Part", "==", "" + document.getElementById("count-part").value);
   await docRef.get().then(function (querySnapshot) {
     querySnapshot.forEach(function (data) {
-      for (let i = 0, j = 0; i < 20; i++, j += 2) {
+      for (let i = 0, j = 0; i < 20; i++, j += 3) {
         arrWrds[i] = data.data()[j + 1];
       }
     });
@@ -301,6 +319,23 @@ async function getWords() {
   console.log(arrWrds);
 }
 
+async function getExamples() {
+  var docRef = db
+    .collection(valueRadio)
+    .where("Part", "==", "" + document.getElementById("count-part").value);
+  await docRef.get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (data) {
+      for (let i = 0, j = 2; i < 20; i++, j += 3) {
+        arrExs[i] = data.data()[j + 1];
+      }
+    });
+  });
+  for (let i = 0; i < arrWrds.length; i++) {
+    randomArrayExs[i] = arrExs[i];
+  }
+  console.log(arrExs);
+}
+
 function addVoca() {
   $(document).ready(function () {
     count_part = parseInt(document.getElementById("count-part").value) + 1;
@@ -309,49 +344,69 @@ function addVoca() {
       .set({
         1: document.getElementById("W1").value,
         2: document.getElementById("D1").value,
-        3: document.getElementById("W2").value,
-        4: document.getElementById("D2").value,
-        5: document.getElementById("W3").value,
-        6: document.getElementById("D3").value,
-        7: document.getElementById("W4").value,
-        8: document.getElementById("D4").value,
-        9: document.getElementById("W5").value,
-        10: document.getElementById("D5").value,
-        11: document.getElementById("W6").value,
-        12: document.getElementById("D6").value,
-        13: document.getElementById("W7").value,
-        14: document.getElementById("D7").value,
-        15: document.getElementById("W8").value,
-        16: document.getElementById("D8").value,
-        17: document.getElementById("W9").value,
-        18: document.getElementById("D9").value,
-        19: document.getElementById("W10").value,
-        20: document.getElementById("D10").value,
-        21: document.getElementById("W11").value,
-        22: document.getElementById("D11").value,
-        23: document.getElementById("W12").value,
-        24: document.getElementById("D12").value,
-        25: document.getElementById("W13").value,
-        26: document.getElementById("D13").value,
-        27: document.getElementById("W14").value,
-        28: document.getElementById("D14").value,
-        29: document.getElementById("W15").value,
-        30: document.getElementById("D15").value,
-        31: document.getElementById("W16").value,
-        32: document.getElementById("D16").value,
-        33: document.getElementById("W17").value,
-        34: document.getElementById("D17").value,
-        35: document.getElementById("W18").value,
-        36: document.getElementById("D18").value,
-        37: document.getElementById("W19").value,
-        38: document.getElementById("D19").value,
-        39: document.getElementById("W20").value,
-        40: document.getElementById("D20").value,
+        3: document.getElementById("E1").value,
+        4: document.getElementById("W2").value,
+        5: document.getElementById("D2").value,
+        6: document.getElementById("E2").value,
+        7: document.getElementById("W3").value,
+        8: document.getElementById("D3").value,
+        9: document.getElementById("E3").value,
+        10: document.getElementById("W4").value,
+        11: document.getElementById("D4").value,
+        12: document.getElementById("E4").value,
+        13: document.getElementById("W5").value,
+        14: document.getElementById("D5").value,
+        15: document.getElementById("E5").value,
+        16: document.getElementById("W6").value,
+        17: document.getElementById("D6").value,
+        18: document.getElementById("E6").value,
+        19: document.getElementById("W7").value,
+        20: document.getElementById("D7").value,
+        21: document.getElementById("E7").value,
+        22: document.getElementById("W8").value,
+        23: document.getElementById("D8").value,
+        24: document.getElementById("E8").value,
+        25: document.getElementById("W9").value,
+        26: document.getElementById("D9").value,
+        27: document.getElementById("E9").value,
+        28: document.getElementById("W10").value,
+        29: document.getElementById("D10").value,
+        30: document.getElementById("E10").value,
+        31: document.getElementById("W11").value,
+        32: document.getElementById("D11").value,
+        33: document.getElementById("E11").value,
+        34: document.getElementById("W12").value,
+        35: document.getElementById("D12").value,
+        36: document.getElementById("E12").value,
+        37: document.getElementById("W13").value,
+        38: document.getElementById("D13").value,
+        39: document.getElementById("E13").value,
+        40: document.getElementById("W14").value,
+        41: document.getElementById("D14").value,
+        42: document.getElementById("E14").value,
+        43: document.getElementById("W15").value,
+        44: document.getElementById("D15").value,
+        45: document.getElementById("E15").value,
+        46: document.getElementById("W16").value,
+        47: document.getElementById("D16").value,
+        48: document.getElementById("E16").value,
+        49: document.getElementById("W17").value,
+        50: document.getElementById("D17").value,
+        51: document.getElementById("E17").value,
+        52: document.getElementById("W18").value,
+        53: document.getElementById("D18").value,
+        54: document.getElementById("E18").value,
+        55: document.getElementById("W19").value,
+        56: document.getElementById("D19").value,
+        57: document.getElementById("E19").value,
+        58: document.getElementById("W20").value,
+        59: document.getElementById("D20").value,
+        60: document.getElementById("E20").value,
         Part: count_part.toString(),
       })
       .then(function () {
-        console.log("Successful!");
         alert("Successful");
+        location.reload();
       })
       .catch(function (error) {
         console.log("Error");
