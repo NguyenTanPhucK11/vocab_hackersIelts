@@ -11,7 +11,7 @@ const COLOR_CODES = {
     threshold: WARNING_THRESHOLD,
   },
   alert: {
-    color: "red",
+    color: "blue",
     threshold: ALERT_THRESHOLD,
   },
 };
