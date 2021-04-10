@@ -7,7 +7,7 @@ const COLOR_CODES = {
     color: "FF0052",
   },
   warning: {
-    color: "green",
+    color: "red",
     threshold: WARNING_THRESHOLD,
   },
   alert: {
