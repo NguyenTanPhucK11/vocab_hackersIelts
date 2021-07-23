@@ -1,7 +1,7 @@
 const TIME_LIMIT = 1; // Start with an initial value of 20 seconds
 const WARNING_THRESHOLD = 10; // Warning occurs at 10s
 const ALERT_THRESHOLD = 5; // Alert occurs at 5s
-const SCORE_LIMIT = 20;
+const SCORE_LIMIT = 10;
 const COLOR_CODES = {
   info: {
     color: "FF0052",
@@ -171,7 +171,7 @@ document.getElementById("score").innerHTML = `
 `;
 
 function addlistVoca() {
-  for (let i = 1; i <= 20; i++) {
+  for (let i = 1; i <= 10; i++) {
     document.getElementById("addVoca").innerHTML += `
           <div text-align: center>
               <span class="badge">${i}</span>
@@ -206,7 +206,7 @@ function examination() {
 
   random();
   document.getElementById("addVoca").innerHTML = "";
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     document.getElementById("addVoca").innerHTML += `
             <div class="input-group">
               <button class="btn btn-primary" style ="margin : 2px">${i + 1}. ${
@@ -263,7 +263,7 @@ function random() {
   randomArrayDefs = [];
   randomArrayWrds = [];
   randomArrayExs = [];
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     let randomDefs = tempRADs[Math.floor(Math.random() * tempRADs.length)];
     for (let j = 0; j < tempRADs.length; j++) {
       if (tempRADs[j] == randomDefs) {
@@ -291,7 +291,7 @@ async function getDefinitions() {
     .where("Part", "==", "" + document.getElementById("count-part").value);
   await docRef.get().then(function (querySnapshot) {
     querySnapshot.forEach(function (data) {
-      for (let i = 0, j = 1; i < 20; i++, j += 3) {
+      for (let i = 0, j = 1; i < 10; i++, j += 3) {
         arrDefs[i] = data.data()[j + 1];
       }
     });
@@ -308,7 +308,7 @@ async function getWords() {
     .where("Part", "==", "" + document.getElementById("count-part").value);
   await docRef.get().then(function (querySnapshot) {
     querySnapshot.forEach(function (data) {
-      for (let i = 0, j = 0; i < 20; i++, j += 3) {
+      for (let i = 0, j = 0; i < 10; i++, j += 3) {
         arrWrds[i] = data.data()[j + 1];
       }
     });
@@ -325,7 +325,7 @@ async function getExamples() {
     .where("Part", "==", "" + document.getElementById("count-part").value);
   await docRef.get().then(function (querySnapshot) {
     querySnapshot.forEach(function (data) {
-      for (let i = 0, j = 2; i < 20; i++, j += 3) {
+      for (let i = 0, j = 2; i < 10; i++, j += 3) {
         arrExs[i] = data.data()[j + 1];
       }
     });
@@ -372,36 +372,6 @@ function addVoca() {
         28: document.getElementById("W10").value,
         29: document.getElementById("D10").value,
         30: document.getElementById("E10").value,
-        31: document.getElementById("W11").value,
-        32: document.getElementById("D11").value,
-        33: document.getElementById("E11").value,
-        34: document.getElementById("W12").value,
-        35: document.getElementById("D12").value,
-        36: document.getElementById("E12").value,
-        37: document.getElementById("W13").value,
-        38: document.getElementById("D13").value,
-        39: document.getElementById("E13").value,
-        40: document.getElementById("W14").value,
-        41: document.getElementById("D14").value,
-        42: document.getElementById("E14").value,
-        43: document.getElementById("W15").value,
-        44: document.getElementById("D15").value,
-        45: document.getElementById("E15").value,
-        46: document.getElementById("W16").value,
-        47: document.getElementById("D16").value,
-        48: document.getElementById("E16").value,
-        49: document.getElementById("W17").value,
-        50: document.getElementById("D17").value,
-        51: document.getElementById("E17").value,
-        52: document.getElementById("W18").value,
-        53: document.getElementById("D18").value,
-        54: document.getElementById("E18").value,
-        55: document.getElementById("W19").value,
-        56: document.getElementById("D19").value,
-        57: document.getElementById("E19").value,
-        58: document.getElementById("W20").value,
-        59: document.getElementById("D20").value,
-        60: document.getElementById("E20").value,
         Part: count_part.toString(),
       })
       .then(function () {
